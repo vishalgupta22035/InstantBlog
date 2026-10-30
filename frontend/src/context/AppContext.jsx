@@ -35,9 +35,28 @@ export const AppProvider = ({ children }) =>{
         }
     },[])
 
-    const value = { 
-        axios, navigate, token, setToken, blogs, setBlogs, input, setInput
-    }
+    const logout = () => {
+    localStorage.removeItem('token');
+
+    delete axios.defaults.headers.common['Authorization'];
+
+    setToken(null);
+
+    navigate('/');
+    toast.success('Logged out successfully');
+};
+
+    const value = {
+    axios,
+    navigate,
+    token,
+    setToken,
+    blogs,
+    setBlogs,
+    input,
+    setInput,
+    logout
+};
 
     return (
         <AppContext.Provider value={value}>
